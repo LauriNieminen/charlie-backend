@@ -30,6 +30,12 @@ app.get('/', (req, res) => {
   res.send('<h1>huutista</h1>')
 })
 
+app.get('/api/characters', (req,res) => {
+  Character.find({}).then(characters => {
+    res.json(characters.map(char => ({name: char.name, id: char._id})))
+  })
+})
+
 app.get('/api/test', (req, res) => {
   Character.find({}).then(characters => {
     res.json(characters.map(character => character.toJSON()))
